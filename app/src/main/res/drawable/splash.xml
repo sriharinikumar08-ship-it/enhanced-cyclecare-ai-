@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Top Petal (Purple) -->
+    <path
+        android:fillColor="#7043A1"
+        android:pathData="M 60,60 C 42,45 42,20 60,15 C 78,20 78,45 60,60 Z" />
+
+    <!-- Bottom Petal (Purple) -->
+    <path
+        android:fillColor="#7043A1"
+        android:pathData="M 60,60 C 42,75 42,100 60,105 C 78,100 78,75 60,60 Z" />
+
+    <!-- Left Petal (Magenta/Rose) -->
+    <path
+        android:fillColor="#B85273"
+        android:pathData="M 60,60 C 45,42 20,42 15,60 C 20,78 45,78 60,60 Z" />
+
+    <!-- Right Petal (Teal) -->
+    <path
+        android:fillColor="#268A88"
+        android:pathData="M 60,60 C 75,42 100,42 105,60 C 100,78 75,78 60,60 Z" />
+
+    <!-- Outer Center Circle (White) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 60,60 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0" />
+
+    <!-- Inner Center Circle (Purple Dot) -->
+    <path
+        android:fillColor="#7043A1"
+        android:pathData="M 60,60 m -4,0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0" />
+
+</vector>

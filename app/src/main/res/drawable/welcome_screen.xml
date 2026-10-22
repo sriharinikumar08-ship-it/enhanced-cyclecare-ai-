@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="140dp"
+    android:viewportWidth="200"
+    android:viewportHeight="140">
+
+    <!-- Card Background -->
+    <path
+        android:fillColor="#EBE4F3"
+        android:pathData="M12,0 H188 A12,12 0 0,1 200,12 V128 A12,12 0 0,1 188,140 H12 A12,12 0 0,1 0,128 V12 A12,12 0 0,1 12,0 Z" />
+
+    <!-- Center Circle Accent -->
+    <path
+        android:fillColor="#DDD2EA"
+        android:pathData="M 100,70 m -45,0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0" />
+
+    <!-- Character Body/Torso (Teal Top) -->
+    <path
+        android:fillColor="#227B78"
+        android:pathData="M 65,140 C 65,100 78,75 100,75 C 122,75 135,100 135,140 Z" />
+
+    <!-- Face & Hair -->
+    <path
+        android:fillColor="#C68866"
+        android:pathData="M 92,42 C 92,35 108,35 108,42 L 108,62 C 108,70 92,70 92,62 Z" />
+
+    <path
+        android:fillColor="#3A2B54"
+        android:pathData="M 86,42 C 86,26 114,26 114,42 C 114,62 108,70 108,70 C 108,70 105,50 100,50 C 95,50 92,70 92,70 C 92,70 86,62 86,42 Z" />
+
+    <!-- Phone -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 106,88 H 126 A 4,4 0 0,1 130,92 V 128 A 4,4 0 0,1 126,132 H 106 A 4,4 0 0,1 102,128 V 92 A 4,4 0 0,1 106,88 Z" />
+
+</vector>
