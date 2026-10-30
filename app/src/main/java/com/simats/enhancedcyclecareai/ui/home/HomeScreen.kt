@@ -24,6 +24,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -56,7 +57,13 @@ import com.simats.enhancedcyclecareai.ui.theme.TitleDark
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(),
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
+    onNavigateToScreenDirectory: () -> Unit = {},
+    onNavigateToCycleTracking: () -> Unit = {},
+    onNavigateToSymptomTracking: () -> Unit = {},
+    onNavigateToLifestyleTracking: () -> Unit = {},
+    onNavigateToNutrition: () -> Unit = {},
+    onNavigateToInsights: () -> Unit = {}
 ) {
     val userName by viewModel.userName.collectAsState()
     val cycleDay by viewModel.cycleDay.collectAsState()
@@ -66,6 +73,31 @@ fun HomeScreen(
     val recentRecords by viewModel.recentRecords.collectAsState()
 
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is HomeUiEvent.NavigateBack -> onNavigateBack()
+                is HomeUiEvent.NavigateToTab -> {
+                    when (event.tabName) {
+                        "Track" -> onNavigateToCycleTracking()
+                        "Insights" -> onNavigateToInsights()
+                        "Nutrition" -> onNavigateToNutrition()
+                    }
+                }
+                is HomeUiEvent.NavigateToFeature -> {
+                    when (event.featureName) {
+                        "Track Cycle" -> onNavigateToCycleTracking()
+                        "Symptoms" -> onNavigateToSymptomTracking()
+                        "Lifestyle" -> onNavigateToLifestyleTracking()
+                        "Nutrition" -> onNavigateToNutrition()
+                        "AI Insights" -> onNavigateToInsights()
+                        "Timeline" -> onNavigateToInsights()
+                    }
+                }
+            }
+        }
+    }
 
     Box(
         modifier = modifier
@@ -103,6 +135,13 @@ fun HomeScreen(
                     text = "A moment to check in with yourself.",
                     fontSize = 14.sp,
                     color = SubtitleMuted
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // 2.5 All Screens Directory Banner
+                AllScreensDirectoryBanner(
+                    onClick = { onNavigateToScreenDirectory() }
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -774,6 +813,64 @@ private fun NavItem(
 }
 
 private fun RectangleShape() = RoundedCornerShape(0.dp)
+
+@Composable
+private fun AllScreensDirectoryBanner(
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(BadgeBackground)
+            .border(1.dp, Color(0xFFD8C8EC), RoundedCornerShape(16.dp))
+            .clickable { onClick() }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(PrimaryPurple),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_sparkles),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Browse All 21 App Screens",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = PrimaryPurple
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "Tap here to explore, test, and view every screen in the app instantly.",
+                    fontSize = 12.sp,
+                    color = SubtitleMuted,
+                    lineHeight = 16.sp
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(
+                painter = painterResource(id = R.drawable.ic_arrow_right),
+                contentDescription = null,
+                tint = PrimaryPurple,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
